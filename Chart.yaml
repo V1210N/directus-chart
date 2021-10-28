@@ -5,6 +5,12 @@ dependencies:
   - name: postgresql
     repository: https://charts.bitnami.com/bitnami
     version: 10.9.3
+  - name: common
+    repository: https://charts.bitnami.com/bitnami
+    version: 1.x.x
+  - name: memcached
+    repository: https://charts.bitnami.com/bitnami
+    version: 1.x.x
 
 # A chart can be either an 'application' or a 'library' chart.
 #
