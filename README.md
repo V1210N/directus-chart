@@ -13,6 +13,7 @@ helm install directus v1210n/directus
 ```
 
 # TO-DO
+- Adjust readiness and liveness probes so that there are no errors in the very first few seconds of the pod's creation
 - Write README for each customizable option for `values.yaml` particular to this chart
 - Allow adding environment variables via `values.yaml`
 - Add option to customize `directus-extension-installer` directories via environment variables
