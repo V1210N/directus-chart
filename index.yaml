@@ -1,0 +1,110 @@
+apiVersion: v1
+entries:
+  common:
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
+    appVersion: 1.8.0
+    created: "2021-10-27T22:07:20.650976426-03:00"
+    description: A Library Helm Chart for grouping common logic between bitnami charts.
+      This chart is not deployable by itself.
+    digest: 8cd256d62b4c79a805993db483adecd515f4d93b5f92a268048ca3ca54d40083
+    home: https://github.com/bitnami/charts/tree/master/bitnami/common
+    icon: https://bitnami.com/downloads/logos/bitnami-mark.png
+    keywords:
+    - common
+    - helper
+    - template
+    - function
+    - bitnami
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    name: common
+    sources:
+    - https://github.com/bitnami/charts
+    - http://www.bitnami.com/
+    type: library
+    urls:
+    - https://v1210n.github.io/directus/charts/common-1.8.0.tgz
+    version: 1.8.0
+  directus:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2021-10-27T22:07:20.650155819-03:00"
+    dependencies:
+    - name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.9.3
+    description: A Helm chart for deploying Directus. Uses Bitnami's PostgresQL by
+      default.
+    digest: e8c8ff7774f77dd25e571d6601f315662c6b259b2c92e2cd8a0f3febd8e2314f
+    name: directus
+    type: application
+    urls:
+    - https://v1210n.github.io/directus/directus-0.1.0.tgz
+    version: 0.1.0
+  memcached:
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
+    appVersion: 1.6.10
+    created: "2021-10-27T22:07:20.653233759-03:00"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: Chart for Memcached
+    digest: a962bda343c3f2120052d50339442fd56a3c71b52b7bc3477dc28c68a589b561
+    home: https://github.com/bitnami/charts/tree/master/bitnami/memcached
+    icon: https://bitnami.com/assets/stacks/memcached/img/memcached-stack-220x234.png
+    keywords:
+    - memcached
+    - cache
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    name: memcached
+    sources:
+    - https://github.com/bitnami/bitnami-docker-memcached
+    - http://memcached.org/
+    urls:
+    - https://v1210n.github.io/directus/charts/memcached-5.14.0.tgz
+    version: 5.14.0
+  postgresql:
+  - annotations:
+      category: Database
+    apiVersion: v2
+    appVersion: 11.13.0
+    created: "2021-10-27T22:07:20.658030309-03:00"
+    dependencies:
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      version: 1.x.x
+    description: Chart for PostgreSQL, an object-relational database management system
+      (ORDBMS) with an emphasis on extensibility and on standards-compliance.
+    digest: 73623468efde749312d7da54b35cb405fd86225a40acc161679fcfa7182d0655
+    home: https://github.com/bitnami/charts/tree/master/bitnami/postgresql
+    icon: https://bitnami.com/assets/stacks/postgresql/img/postgresql-stack-220x234.png
+    keywords:
+    - postgresql
+    - postgres
+    - database
+    - sql
+    - replication
+    - cluster
+    maintainers:
+    - email: containers@bitnami.com
+      name: Bitnami
+    - email: cedric@desaintmartin.fr
+      name: desaintmartin
+    name: postgresql
+    sources:
+    - https://github.com/bitnami/bitnami-docker-postgresql
+    - https://www.postgresql.org/
+    urls:
+    - https://v1210n.github.io/directus/charts/postgresql-10.9.3.tgz
+    version: 10.9.3
+generated: "2021-10-27T22:07:20.640230659-03:00"
