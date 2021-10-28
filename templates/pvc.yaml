@@ -5,6 +5,8 @@ metadata:
   name: {{ include "directus.fullname" . }}
   labels: {{- include "directus.labels" . | nindent 4 }}
   namespace: {{ .Release.Namespace | quote }}
+  annotations:
+    helm.sh/resource-policy: "keep"
 spec:
   accessModes:
     - {{ .Values.persistence.accessMode | quote }}

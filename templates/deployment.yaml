@@ -13,10 +13,12 @@ spec:
       {{- include "directus.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
       annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        checksum/secret: {{ include (print $.Template.BasePath "/secret.yaml") . | sha256sum }}
+        {{- with .Values.podAnnotations }}
         {{- toYaml . | nindent 8 }}
-      {{- end }}
+        {{- end }}
       labels:
         {{- include "directus.selectorLabels" . | nindent 8 }}
     spec:
@@ -41,10 +43,12 @@ spec:
           readinessProbe: {{- omit .Values.readinessProbe "enabled" | toYaml | nindent 12 }}
           volumeMounts:
             - name: directus-data
-              mountPath: /directus
+              mountPath: /directus/uploads
+            {{- with .Values.directusExtensions }}
             - name: extensions-config
-              mountPath: "/extensions-config"
+              mountPath: "/etc/extensions-config"
               readOnly: true
+            {{- end }}
           resources: {{- toYaml .Values.resources | nindent 12 }}
           env:
             - name: KEY
@@ -82,21 +86,11 @@ spec:
                 secretKeyRef:
                   name: directus-env-secrets
                   key: ADMIN_PASSWORD
-            - name: DIRECTUS_ENV
-              valueFrom:
-                configMapKeyRef:
-                  name: directus-env-configmap
-                  key: DIRECTUS_ENV
             - name: DIRECTUS_INSTALL_TITLE
               valueFrom:
                 configMapKeyRef:
                   name: directus-env-configmap
                   key: DIRECTUS_INSTALL_TITLE
-            - name: DIRECTUS_INSTALL_FORCE
-              valueFrom:
-                configMapKeyRef:
-                  name: directus-env-configmap
-                  key: DIRECTUS_INSTALL_FORCE
             - name: DB_CLIENT
               valueFrom:
                 configMapKeyRef:
@@ -109,6 +103,20 @@ spec:
                 configMapKeyRef:
                   name: directus-env-configmap
                   key: DIRECTUS_DATABASE_PORT
+          {{- with .Values.directusExtensions }}
+          lifecycle:
+            postStart:
+              exec:
+                command:
+                  - sh
+                  - -c
+                  - test -f /etc/extensions-config/extensions.yaml && npx -y directus-extensions-installer install --config /etc/extensions-config/extensions.yaml --download-dir /tmp/extension-downloads --directus-dir /directus;
+          {{- end }}
+          command:
+            - sh
+            - -c
+          args:
+            -  npx directus bootstrap && npx directus start;
       volumes:
         - name: directus-data
           {{- if .Values.persistence.enabled }}
@@ -117,12 +125,14 @@ spec:
           {{- else }}
           emptyDir: {}
           {{ end }}
-        # - name: extensions-config
-        #   configMap:
-        #     name: directus-extensions-configmap
-        #     items: 
-        #       - key: EXTENSIONS
-        #         path: extensions.yaml
+        {{- with .Values.directusExtensions }}
+        - name: extensions-config
+          secret:
+            secretName: directus-extensions-secrets
+            items:
+              - key: extensions
+                path: extensions.yaml
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

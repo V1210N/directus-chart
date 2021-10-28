@@ -74,19 +74,20 @@ databaseCluster: cluster.local
 ## ref: https://v8.docs.directus.io/docker/environment.html
 ## ref: https://docs.directus.io/reference/environment-variables/
 
+## @param directusExtensions Specify extensions to add before bootstrapping directus
+## ref: https://github.com/V1210N/directus-extensions-installer
+## 
 # directusExtensions:
-#   - name: test-directus-extension
-#     owner: V1210N
-#     repo: extension-repo
-#     token: ghp_some_token
+#   - name: module-name
+#     owner: repository-owner
+#     repo: repository-name
+#     token: ghp_123456
 #     type: module
+#     tag: latest
 
-## @param directusEnv Deployment environment
-##
-directusEnv: development
 ## @param directusTitle Directus installation's title
 ##
-directusTitle: Directus CMS
+directusTitle: Foo Company CMS
 ## @param directusKey Directus project's identifier key
 ##
 directusKey: akeyexample123
@@ -99,8 +100,6 @@ directusEmail: user@example.com
 ## @param directusPassword Directus admin password
 ##
 directusPassword: "123456"
-## @param directusForceInstall Enable Directus' forced installation
-directusForceInstall: false
 ## @param directusDatabaseType Directus database's type
 ##
 directusDatabaseClient: postgres
@@ -184,7 +183,7 @@ autoscaling:
 persistence:
   ## @param persistence.enabled Enable persistence using Persistent Volume Claims
   ##
-  enabled: false
+  enabled: enabled
   ## @param persistence.storageClass Persistent Volume storage class
   ## If defined, storageClassName: <storageClass>
   ## If set to "-", storageClassName: "", which disables dynamic provisioning
@@ -240,7 +239,7 @@ livenessProbe:
     ##   value: https
     ##
     httpHeaders: []
-  initialDelaySeconds: 180
+  # initialDelaySeconds: 180
   periodSeconds: 10
   timeoutSeconds: 5
   failureThreshold: 6
@@ -269,7 +268,7 @@ readinessProbe:
     ##   value: https
     ##
     httpHeaders: []
-  initialDelaySeconds: 120
+  # initialDelaySeconds: 120
   periodSeconds: 10
   timeoutSeconds: 5
   failureThreshold: 6
