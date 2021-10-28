@@ -5,7 +5,7 @@ entries:
       category: Infrastructure
     apiVersion: v2
     appVersion: 1.8.0
-    created: "2021-10-27T22:17:56.384414426-03:00"
+    created: "2021-10-27T22:54:45.197349965-03:00"
     description: A Library Helm Chart for grouping common logic between bitnami charts.
       This chart is not deployable by itself.
     digest: 8cd256d62b4c79a805993db483adecd515f4d93b5f92a268048ca3ca54d40083
@@ -31,7 +31,7 @@ entries:
   directus:
   - apiVersion: v2
     appVersion: 1.16.0
-    created: "2021-10-27T22:17:56.383365003-03:00"
+    created: "2021-10-27T22:54:45.196303275-03:00"
     dependencies:
     - name: postgresql
       repository: https://charts.bitnami.com/bitnami
@@ -44,18 +44,18 @@ entries:
       version: 1.x.x
     description: A Helm chart for deploying Directus. Uses Bitnami's PostgresQL by
       default.
-    digest: 399d63e83e4ee905b2ccde96711a414aab6619cf438de91ac6be15700d27a0a7
+    digest: c4c1286361fb8aab5c0d40d7351349d6f18c49dc98cc01275acb16b790750773
     name: directus
     type: application
     urls:
-    - https://v1210n.github.io/directus-chart/directus-0.1.0.tgz
-    version: 0.1.0
+    - https://v1210n.github.io/directus-chart/directus-0.1.1.tgz
+    version: 0.1.1
   memcached:
   - annotations:
       category: Infrastructure
     apiVersion: v2
     appVersion: 1.6.10
-    created: "2021-10-27T22:17:56.38725084-03:00"
+    created: "2021-10-27T22:54:45.199754673-03:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -84,7 +84,7 @@ entries:
       category: Database
     apiVersion: v2
     appVersion: 11.13.0
-    created: "2021-10-27T22:17:56.392974325-03:00"
+    created: "2021-10-27T22:54:45.204205436-03:00"
     dependencies:
     - name: common
       repository: https://charts.bitnami.com/bitnami
@@ -113,4 +113,4 @@ entries:
     urls:
     - https://v1210n.github.io/directus-chart/charts/postgresql-10.9.3.tgz
     version: 10.9.3
-generated: "2021-10-27T22:17:56.369192462-03:00"
+generated: "2021-10-27T22:54:45.182057288-03:00"

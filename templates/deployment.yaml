@@ -44,7 +44,7 @@ spec:
           volumeMounts:
             - name: directus-data
               mountPath: /directus/uploads
-            {{- with .Values.directusExtensions }}
+            {{- if .Values.directusExtensions }}
             - name: extensions-config
               mountPath: "/etc/extensions-config"
               readOnly: true
@@ -103,7 +103,7 @@ spec:
                 configMapKeyRef:
                   name: directus-env-configmap
                   key: DIRECTUS_DATABASE_PORT
-          {{- with .Values.directusExtensions }}
+          {{- if .Values.directusExtensions }}
           lifecycle:
             postStart:
               exec:
@@ -125,7 +125,7 @@ spec:
           {{- else }}
           emptyDir: {}
           {{ end }}
-        {{- with .Values.directusExtensions }}
+        {{- if .Values.directusExtensions }}
         - name: extensions-config
           secret:
             secretName: directus-extensions-secrets
