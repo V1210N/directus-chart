@@ -102,3 +102,16 @@ Get the database service's host
 {{- define "directus.databaseService" -}}
 {{- printf "%s-%s.%s.svc.%s" .Chart.Name .Values.databaseServiceSuffix .Release.Namespace .Values.databaseCluster }}
 {{- end }}
+
+{{/*
+Renders a value that contains template.
+Usage:
+{{ include "directus.render" ( dict "value" .Values.path.to.the.Value "context" $) }}
+*/}}
+{{- define "directus.render" -}}
+    {{- if typeIs "string" .value }}
+        {{- tpl .value .context }}
+    {{- else }}
+        {{- tpl (.value | toYaml) .context }}
+    {{- end }}
+{{- end -}}

@@ -116,6 +116,12 @@ directusDatabaseUsername: directus
 ##
 directusDatabasePassword: directus123
 
+## @param extraEnvVars Additional mapping of environment variables to add to Directus pods. Can be used to configure storage adapters and etc.
+extraEnvVars: []
+  # - name: FOO
+    # value: BAR
+
+
 ## Directus service parameters
 ##
 service:

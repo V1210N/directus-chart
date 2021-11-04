@@ -103,6 +103,9 @@ spec:
                 configMapKeyRef:
                   name: directus-env-configmap
                   key: DIRECTUS_DATABASE_PORT
+            {{- if .Values.extraEnvVars }}
+            {{- include "directus.render" (dict "value" .Values.extraEnvVars "context" $) | nindent 12 }}
+            {{- end }}
           {{- if .Values.directusExtensions }}
           lifecycle:
             postStart:
