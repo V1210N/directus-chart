@@ -115,11 +115,21 @@ spec:
                   - -c
                   - test -f /etc/extensions-config/extensions.yaml && npx -y directus-extensions-installer install --config /etc/extensions-config/extensions.yaml --download-dir /tmp/extension-downloads --directus-dir /directus;
           {{- end }}
+          {{- if .Values.command }}
           command:
-            - sh
-            - -c
+            {{ .Values.command | toYaml | nindent 12 }} 
+          {{- else }}
+          command:
+            ['sh', '-c']
+          {{- end }}
+
+          {{- if .Values.args }}
           args:
-            -  npx directus bootstrap && npx directus start;
+            {{ .Values.args | toYaml | nindent 12 }} 
+          {{- else }}
+          args:
+            ['npx directus bootstrap && npx directus start']
+          {{- end }}
       volumes:
         - name: directus-data
           {{- if .Values.persistence.enabled }}

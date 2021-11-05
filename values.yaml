@@ -34,6 +34,8 @@ global:
     postgresqlPassword: directus123
 
 postgresql:
+  serviceAccount:
+    enabled: true
   image:
     tag: "12.8.0-debian-10-r21" # Directus requires postgres 12+
 
@@ -218,6 +220,13 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+## @param command Override default container command (useful when using custom images)
+##
+command: []
+## @param args Override default container args (useful when using custom images)
+##
+args: []
 
 ## Configure extra options for Directus containers' liveness and readiness probes
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes
